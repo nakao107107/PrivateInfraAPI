@@ -41,7 +41,7 @@ yarn-debug.log*
 !/storage/.keep
 /public/uploadse/*
 !.vscode/settings.json
-!.vscode/tasks.json
+!.vscode/tasks.jsecho 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profileon
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
