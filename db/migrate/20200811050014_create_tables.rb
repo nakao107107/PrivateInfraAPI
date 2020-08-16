@@ -3,6 +3,9 @@ class CreateTables < ActiveRecord::Migration[6.0]
 
     create_table :events, id: :string do |t|
       t.string :name
+      t.string :hp_url
+      t.string :slack_url
+      t.string :recommend_text
       t.datetime :deadline
       t.timestamps
     end

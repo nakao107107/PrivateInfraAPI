@@ -1,20 +1,20 @@
 class EventsController < ApplicationController
   def index
-    events = Event.where("deadline >= ?", Time.current)
-    render json: events
+    events = Event.includes([:industries, :occupations]).where("deadline >= ?", Time.current)
+    render json: events, each_serializer: EventSerializer
   end
 
   def show
-    event = Event.find(params[:id])
-    render json: event
+    event = Event.includes([:industries, :occupations]).find(params[:id])
+    render json: event, serializer: EventSerializer
   rescue => e
     render json: {message: 'record not found'}, status: 404
   end
 
   def progress
-    event_ids = Event.all.pluck(:id)
-    progress_event_ids = Progress.where(status: 'IN_PROGRESS').pluck(:event_id)
-    done_event_ids = Progress.where(status: 'DONE').pluck(:event_id)
+    event_ids = Event.where("deadline >= ?", Time.current).all.pluck(:id)
+    progress_event_ids = Progress.where(mentor_id: @mentor.id).where(status: 'IN_PROGRESS').pluck(:event_id)
+    done_event_ids = Progress.where(mentor_id: @mentor.id).where(status: 'DONE').pluck(:event_id)
     new_event_ids = event_ids - (progress_event_ids + done_event_ids)
 
     progress = {

@@ -58,6 +58,9 @@ ActiveRecord::Schema.define(version: 2020_08_11_050014) do
 
   create_table "events", id: :string, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
+    t.string "hp_url"
+    t.string "slack_url"
+    t.string "recommend_text"
     t.datetime "deadline"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
