@@ -12,6 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2020_08_11_050014) do
 
+  create_table "appeals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "entor_id"
+    t.string "mentor_id"
+    t.string "event_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "entor_id"
     t.string "event_id"

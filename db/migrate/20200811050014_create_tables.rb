@@ -72,5 +72,12 @@ class CreateTables < ActiveRecord::Migration[6.0]
       t.string :occupation_id
       t.timestamps
     end
+
+    create_table :appeals do |t|
+      t.string :entor_id
+      t.string :mentor_id
+      t.string :event_id
+      t.timestamps
+    end
   end
 end

@@ -39,6 +39,16 @@ class Batch::DataUpdate
       entor.mentor_id = mentor ? mentor.id : ''
       entor.save
     end
+    puts "event update"
+    #イベント
+    sp = @session.spreadsheet_by_url("https://docs.google.com/spreadsheets/d/1jZZEYpx1a4LPf2FZlbC35XeJlHbD6rv9Ml2IczcS3xg/edit#gid=285396842")
+    ws = sp.worksheet_by_title("案件DashBoard")
+    (2..ws.num_rows).each do |row|
+      event = Event.find_or_initialize_by(id: ws[row, 1])
+      event.name = ws[row, 3]
+      event.deadline = ws[row, 4]
+      event.save
+    end
   end
 
 end
