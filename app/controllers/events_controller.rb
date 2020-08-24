@@ -34,6 +34,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.permit(:id, :name, :hp_url, :slack_url, :recommend_text, :type)
+    params.permit(:id, :name, :hp_url, :slack_url, :deadline, :recommend_text, :company_type)
   end
 end
