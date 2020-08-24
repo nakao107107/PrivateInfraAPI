@@ -11,6 +11,13 @@ class EventsController < ApplicationController
     render json: {message: 'record not found'}, status: 404
   end
 
+  def create
+    event = Event.create!(event_params)
+    event.relate_industries(params[:industries])
+    event.relate_occupations(params[:occupations])
+    render json: event, serializer: EventSerializer
+  end
+
   def progress
     event_ids = Event.where("deadline >= ?", Time.current).all.pluck(:id)
     progress_event_ids = Progress.where(mentor_id: @mentor.id).where(status: 'IN_PROGRESS').pluck(:event_id)
@@ -26,7 +33,7 @@ class EventsController < ApplicationController
     render json: progress
   end
 
-  def update_progress
-
+  def event_params
+    params.permit(:id, :name, :hp_url, :slack_url, :recommend_text, :type)
   end
 end

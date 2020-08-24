@@ -27,7 +27,7 @@ class EntorsController < ApplicationController
   end
 
   def entor_params
-    params.permit(:nickname)
+    params.permit(:nickname, :company_type)
   end
 
 end
