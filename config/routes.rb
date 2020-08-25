@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   post '/auth/login' => 'auth#login'
+  get '/mentors/status' => 'mentors#status'
   resources :entors, only: [:index, :show, :update]
   resources :events, only: [:index, :show, :create] do
     collection do
