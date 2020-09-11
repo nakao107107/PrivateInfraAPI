@@ -50,6 +50,6 @@ test:
 #
 production:
   <<: *default
-  database: PrivateInfraAPI_production
-  username: PrivateInfraAPI
-  password: <%= ENV['PRIVATEINFRAAPI_DATABASE_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASS'] %>
