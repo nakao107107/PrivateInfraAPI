@@ -7,9 +7,9 @@ class ProgressesController < ApplicationController
     new_event_ids = event_ids - (progress_event_ids + done_event_ids)
 
     progress = {
-        new: Event.where(id: new_event_ids),
-        progress: Event.where(id: progress_event_ids),
-        done: Event.where(id: done_event_ids)
+        new: Event.where(id: new_event_ids).where("deadline >= ?", Time.current),
+        progress: Event.where(id: progress_event_ids).where("deadline >= ?", Time.current),
+        done: Event.where(id: done_event_ids).where("deadline >= ?", Time.current)
     }
     render json: progress
   end
