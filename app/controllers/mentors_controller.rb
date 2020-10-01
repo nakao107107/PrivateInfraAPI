@@ -1,4 +1,10 @@
 class MentorsController < ApplicationController
+  before_action :check_session, only: [:profile]
+
+  def profile
+    render json: @mentor, serializer: MentorSerializer
+  end
+
   def status
     mentor_status = []
     mentors = Mentor.where(group: params[:group]).all
