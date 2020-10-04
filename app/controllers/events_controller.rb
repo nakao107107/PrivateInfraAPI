@@ -26,22 +26,7 @@ class EventsController < ApplicationController
     render json: event, serializer: EventSerializer
   end
 
-  def progress
-    event_ids = Event.where("deadline >= ?", Time.current).all.pluck(:id)
-    progress_event_ids = Progress.where(mentor_id: @mentor.id).where(status: 'IN_PROGRESS').pluck(:event_id)
-    done_event_ids = Progress.where(mentor_id: @mentor.id).where(status: 'DONE').pluck(:event_id)
-    new_event_ids = event_ids - (progress_event_ids + done_event_ids)
-
-    progress = {
-        new: Event.where(id: new_event_ids).where("deadline >= ?", Time.current),
-        progress: Event.where(id: progress_event_ids).where("deadline >= ?", Time.current),
-        done: Event.where(id: done_event_ids).where("deadline >= ?", Time.current)
-    }
-
-    render json: progress
-  end
-
   def event_params
-    params.permit(:id, :name, :hp_url, :slack_url, :deadline, :recommend_text, :company_type)
+    params.permit(:id, :name, :hp_url, :slack_url, :deadline, :recommend_text, :company_type, :is_open)
   end
 end

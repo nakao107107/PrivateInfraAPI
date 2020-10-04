@@ -1,5 +1,5 @@
 class EventSerializer < ActiveModel::Serializer
-  attributes :id, :name, :company_type, :hp_url, :slack_url, :recommend_text, :deadline, :occupations, :industries
+  attributes :id, :name, :company, :company_type, :hp_url, :slack_url, :recommend_text, :deadline, :occupations, :industries, :is_open
   def occupations
     object.occupations.pluck(:id)
   end

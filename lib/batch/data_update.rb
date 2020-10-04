@@ -45,6 +45,7 @@ class Batch::DataUpdate
     ws = sp.worksheet_by_title("案件DashBoard")
     (2..ws.num_rows).each do |row|
       event = Event.find_or_initialize_by(id: ws[row, 1])
+      event.company = ws[row, 2]
       event.name = ws[row, 3]
       event.deadline = ws[row, 4]
       event.save
