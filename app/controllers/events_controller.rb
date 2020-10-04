@@ -1,6 +1,9 @@
 class EventsController < ApplicationController
   def index
     events = Event.includes([:industries, :occupations]).where("deadline >= ?", Time.current)
+    if params[:publish]
+      events = events.where(is_open: true)
+    end
     render json: events, each_serializer: EventSerializer
   end
 
