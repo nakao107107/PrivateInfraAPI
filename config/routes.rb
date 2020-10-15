@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/profile' => 'mentors#profile'
   resources :entors, only: [:index, :show, :update]
   resources :events, only: [:index, :show, :create, :update] do
+    post '/post-to-slack' => 'events#post_to_slack'
     collection do
       resource :progress, only: [:show, :update]
     end

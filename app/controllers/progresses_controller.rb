@@ -14,6 +14,10 @@ class ProgressesController < ApplicationController
     render json: progress
   end
 
+  def postToSlack
+
+  end
+
   def update
     progress = Progress.find_or_initialize_by(
         {

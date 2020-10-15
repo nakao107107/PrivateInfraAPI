@@ -218,6 +218,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   dotenv-rails
+  faraday
   google_drive
   listen (~> 3.2)
   mysql2 (>= 0.4.4)
