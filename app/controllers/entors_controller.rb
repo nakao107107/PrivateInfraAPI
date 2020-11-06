@@ -4,6 +4,9 @@ class EntorsController < ApplicationController
 
   def index
     entors = Entor.where(mentor_id: @mentor.id)
+    if params[:application_count_less_than]
+      entors = entors.where(application_count: 0..params[:application_count_less_than].to_i)
+    end
     render json: entors
   end
 

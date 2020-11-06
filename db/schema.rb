@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_14_044658) do
+ActiveRecord::Schema.define(version: 2020_11_06_134839) do
 
   create_table "appeals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "entor_id"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2020_10_14_044658) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "company_type"
+    t.integer "application_count"
   end
 
   create_table "event_industries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
