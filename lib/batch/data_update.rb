@@ -55,8 +55,9 @@ class Batch::DataUpdate
     sp = @session.spreadsheet_by_url("https://docs.google.com/spreadsheets/d/1jZZEYpx1a4LPf2FZlbC35XeJlHbD6rv9Ml2IczcS3xg/edit#gid=1951559560")
     ws = sp.worksheet_by_title("application")
     (1..ws.num_rows).each do |row|
-      event = Application.find_or_initialize_by(entor_id: ws[row, 1], event_id: ws[row, 3], applicated_at: ws[row, 4])
-      event.save
+      application = Application.find_or_initialize_by(entor_id: ws[row, 1], applicated_at: ws[row, 4])
+      application.event_id = ws[row, 3]
+      application.save
     end
   end
 
