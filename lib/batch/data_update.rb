@@ -15,6 +15,14 @@ class Batch::DataUpdate
 
   def execute
     puts "process start"
+    #機会創出
+    puts "application update"
+    sp = @session.spreadsheet_by_url("https://docs.google.com/spreadsheets/d/1jZZEYpx1a4LPf2FZlbC35XeJlHbD6rv9Ml2IczcS3xg/edit#gid=1951559560")
+    ws = sp.worksheet_by_title("application")
+    (1..ws.num_rows).each do |row|
+      application = Application.find_or_initialize_by(entor_id: ws[row, 1], event_id: ws[row, 3], applicated_at: ws[row, 4])
+      application.save
+    end
     puts "mentor update"
     #メンター
     sp = @session.spreadsheet_by_url("https://docs.google.com/spreadsheets/d/1_XptOWq0ggko9n81yQ1No9FIWKwWFv4ghsUhifJAfF0/edit#gid=1505417215")
@@ -49,15 +57,6 @@ class Batch::DataUpdate
       event.name = ws[row, 3]
       event.deadline = ws[row, 4]
       event.save
-    end
-    #機会創出
-    puts "application update"
-    sp = @session.spreadsheet_by_url("https://docs.google.com/spreadsheets/d/1jZZEYpx1a4LPf2FZlbC35XeJlHbD6rv9Ml2IczcS3xg/edit#gid=1951559560")
-    ws = sp.worksheet_by_title("application")
-    (1..ws.num_rows).each do |row|
-      application = Application.find_or_initialize_by(entor_id: ws[row, 1], applicated_at: ws[row, 4])
-      application.event_id = ws[row, 3]
-      application.save
     end
   end
 
