@@ -17,9 +17,15 @@ class EventsController < ApplicationController
 
   def post_to_slack
     event = Event.includes([:industries, :occupations]).find(params[:event_id])
-    http = Http.new(ENV['SLACK_URL'])
+    if (params[:mode] == 'draft')
+      http = Http.new(ENV['SLACK_DRAFT_URL'])
+      text = ""
+    elsif (params[:mode] == 'prod')
+      http = Http.new(ENV['SLACK_PROD_URL'])
+      text = "<!channel>\n"
+    end
     #eventデータからtext作成
-    text = "<!channel>\n新着案件告知です!\n\n*<#{event.hp_url}/|#{event.name}>*"
+    text = text + "新着案件告知です!\n\n*<#{event.hp_url}/|#{event.name}>*"
     industries = event.industries
     industries_array = industries.map{|industry| industry.name}
     text = text + "\n\n*業界*: #{industries_array.join(', ')}"
@@ -29,9 +35,7 @@ class EventsController < ApplicationController
     text = text + "\n\n自分のエンターとの相性をチェック\nhttp://encourage.lei-wa.link/events/#{event.id}"
     body = {text: text}
     res = http.post('', body.to_json)
-    puts res[:body]
   rescue => e
-    puts e
     render json: {message: 'failed to post to slack'}, status: 404
   end
 
