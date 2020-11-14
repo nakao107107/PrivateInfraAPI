@@ -5,10 +5,10 @@
 set :output, 'log/crontab.log'
 set :environment, :production
 
-every 10.minutes do
+every 8.hours do
   runner 'Batch::DataUpdate.new.execute'
 end
 
-every 10.minutes do
+every 8.hours do
   runner 'Batch::UpdateApplicationCount.new.execute'
 end
