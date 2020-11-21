@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     collection do
       resource :progress, only: [:show, :update]
     end
+    resource :assign, only: [:create, :destroy]
   end
   resources :occupations, only: [:index]
   resources :industries, only: [:index]
