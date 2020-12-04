@@ -25,7 +25,7 @@ class EventsController < ApplicationController
       text = "<!channel>\n"
     end
     #eventデータからtext作成
-    text = text + "新着案件告知です!\n\n*<#{event.hp_url}/|#{event.name}>*"
+    text = text + "新着案件告知です!\n\n*<#{event.hp_url}|#{event.name}>*"
     industries = event.industries
     industries_array = industries.map{|industry| industry.name}
     text = text + "\n\n*業界*: #{industries_array.join(', ')}"
